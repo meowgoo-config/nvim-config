@@ -10,6 +10,7 @@ return {
                 file_ignore_patterns = {
                     "%.meta",
                     "lazy%-lock.json",
+                    "^vendor/"
                 }
             },
         })
