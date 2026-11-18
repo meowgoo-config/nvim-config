@@ -1,30 +1,54 @@
-require("vanya")
+require("remap")
+require("settings")
 
 
-function gh(s) return "https://github.com/" .. s end
+if vim.g.neovide then
+    vim.o.guifont = "Inconsolata LGC Nerd Font Mono:h10"
+end
+
+
+GH = "https://github.com/"
+
 vim.pack.add({
-    gh("nvim-tree/nvim-web-devicons"),
-    gh("stevearc/oil.nvim"),
+    GH .. "nvim-tree/nvim-web-devicons",
+    GH .. "stevearc/oil.nvim",
 
-    gh("windwp/nvim-autopairs"),
+    GH .. "windwp/nvim-autopairs",
 
-    gh("norcalli/nvim-colorizer.lua"),
-    gh("nvim-lualine/lualine.nvim"),
+    GH .. "norcalli/nvim-colorizer.lua",
+    GH .. "nvim-lualine/lualine.nvim",
 
-    gh("sindrets/diffview.nvim"),
-    gh("ibhagwan/fzf-lua"),
-    gh("NeogitOrg/neogit"),
+    GH .. "sindrets/diffview.nvim",
+    GH .. "ibhagwan/fzf-lua",
+    GH .. "NeogitOrg/neogit",
 
-    gh("unblevable/quick-scope"),
+    GH .. "unblevable/quick-scope",
 
     -- gh("mason-org/mason.nvim"),
     -- gh("Decodetalkers/csharpls-extended-lsp.nvim"),
-    gh("neovim/nvim-lspconfig"),
+    GH .. "neovim/nvim-lspconfig",
+
+    GH .. "olivercederborg/poimandres.nvim",
+
+    GH .. "nvim-lua/plenary.nvim",
+    GH .. "nvim-telescope/telescope.nvim",
+    GH .. "nvim-telescope/telescope-fzf-native.nvim",
 })
 
+vim.cmd("colorscheme poimandres")
 
--- require("mason").setup()
-vim.lsp.enable("omnisharp")
+
+local telescope = require("telescope.builtin")
+vim.keymap.set("n", "<leader>fs", telescope.find_files, {})
+vim.keymap.set("n", "<leader>fg", telescope.live_grep, {})
+
+require("telescope").setup{
+    defaults = {
+        file_ignore_patterns = { "%.meta", "%.uid", "^vendor/" },
+    }
+}
+
+
 
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
@@ -45,19 +69,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
     end
 })
+vim.lsp.enable("omnisharp")
 
 
--- local neogit = require("neogit")
+require("neogit").setup{}
+
 -- vim.keymap.set("n", "<leader>gh", neogit.open({ kind = "split" }))
 vim.keymap.set("n", "<leader>gh", "<CMD>Neogit kind=split<CR>")
 
 
-require("oil").setup({
-    default_file_explorer = true
-})
-
+require("oil").setup({ default_file_explorer = true })
 vim.keymap.set("n", "<leader>ep", "<cmd>Oil<CR>")
-
 
 
 require("nvim-autopairs").setup({})
@@ -66,7 +88,5 @@ require("nvim-autopairs").setup({})
 require("colorizer").setup({"*"})
 
 require("lualine").setup({
-    options = {
-        theme = "horizon"
-    }
+    options = { theme = "horizon" }
 })
