@@ -1,8 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- vim.keymap.set("n", "<leader>nt", vim.cmd.NvimTreeOpen)
--- vim.keymap.set("n", "<leader>qs", vim.cmd.QuickScopeToggle)
 vim.keymap.set("n", "<leader>/", vim.cmd.noh)
 
 vim.keymap.set({ "n", "v" }, "<leader>d", "\"+d")
@@ -12,8 +10,6 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"+C")
 vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y")
 vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p")
 vim.keymap.set({ "n", "v" }, "<leader>P", "\"+P")
-
--- vim.keymap.set({ "n", "v" }, "gG", "gg")
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

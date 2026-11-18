@@ -33,6 +33,8 @@ vim.pack.add({
     GH .. "nvim-lua/plenary.nvim",
     GH .. "nvim-telescope/telescope.nvim",
     GH .. "nvim-telescope/telescope-fzf-native.nvim",
+
+    GH .. "ms-jpq/coq_nvim",
 })
 
 vim.cmd("colorscheme poimandres")
@@ -47,6 +49,20 @@ require("telescope").setup{
         file_ignore_patterns = { "%.meta", "%.uid", "^vendor/" },
     }
 }
+
+
+if false then
+vim.g.coq_settings = {
+    keymap = {
+        recommended = false,
+        pre_select = true,
+    }
+}
+
+vim.api.nvim_set_keymap("i", "<C-j>", [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-k>", [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true, silent = true })
+vim.api.nvim_set_keymap("i", "<Tab>", [[pumvisible() && (complete_info().selected != -1) ? "\<C-y>" : "\<Tab>"]], { expr = true, silent = true })
+end
 
 
 
