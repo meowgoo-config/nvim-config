@@ -87,8 +87,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 vim.lsp.enable("omnisharp")
 
+vim.g.loaded_matchparen = true
 
-require("neogit").setup{}
+require("neogit").setup{
+    commit_editor = {
+        spell_check = false,
+    }
+}
 
 -- vim.keymap.set("n", "<leader>gh", neogit.open({ kind = "split" }))
 vim.keymap.set("n", "<leader>gh", "<CMD>Neogit kind=split<CR>")
